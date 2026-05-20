@@ -10,11 +10,12 @@ class Claw {
 
     public:
         Claw(int min_pos, int max_pos, int init_pos, uint8_t pin) 
-        : min_pos(min_pos), max_pos(max_pos), servo(new Servo()) {
+        : min_pos(min_pos), max_pos(max_pos) {
+            servo = new Servo();
             servo->attach(pin);
             current_pos = init_pos;
         }
-        Claw(int min_pos, int max_pos, uint8_t pin) { Claw(min_pos, max_pos, min_pos, pin); }
+        Claw(int min_pos, int max_pos, uint8_t pin) : Claw(min_pos, max_pos, min_pos, pin) {}
 
         void moveToPos(int pos) {
             pos = constrain(pos, this->min_pos, this->max_pos);

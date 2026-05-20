@@ -6,7 +6,7 @@
 
 SerialReader reader;
 
-Claw claw(95, 150, 22);
+Claw claw(95, 170, 18);
 Wrist wrist(19, 21, 22, 23);
 
 void readCommand(size_t argc, char argv[]) {
@@ -20,11 +20,15 @@ void readCommand(size_t argc, char argv[]) {
    if (argc >= 3 && argv[1] == '/') {
       switch (argv[2]) {
          case 'c': // claw
+            for (size_t i = 0; i < argc; i++) 
+               Serial.print(argv[i]);
+            Serial.println();
             if (argc == 6 && argv[3] == 'm') { // move
-               if (argv[4] == '0') claw.openClaw();
+               if (argv[4] == '0') claw.closeClaw();
                else {
-                  int val = (argv[4] - '1') * 2;
-                  claw.move(-val); 
+                  claw.openClaw();
+                  // int val = (argv[4] - '1') * 2;
+                  // claw.move(-val);
                }
             } 
             break;
@@ -39,9 +43,9 @@ void readCommand(size_t argc, char argv[]) {
             break;
       }
    } else { // comment (comment)
-      for (size_t i = 0; i < argc; i++) 
-         Serial.print(argv[i]);
-      Serial.println();
+      // for (size_t i = 0; i < argc; i++) 
+      //    Serial.print(argv[i]);
+      // Serial.println();
    }
 }
 

@@ -21,7 +21,7 @@ while True:
     else:
         x = 1
         if keyboard.is_pressed('w'): x += 1
-        if keyboard.is_pressed('d'): x += 1
+        if keyboard.is_pressed('s'): x -= 1
         output = "</cm" + str(x) + ">"
 
     port.write(output.encode())
