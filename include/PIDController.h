@@ -39,14 +39,9 @@ class PIDController {
     public:
         static const ToleranceConfigs DEFAULT_TOLERANCES;
 
-        PIDController(const PIDConfigs *configs, const ToleranceConfigs *tolConfigs) : configs(configs), tolConfigs(tolConfigs) {
-            this->setPoint = 0.0;
-            reset();
-        }
-
-        PIDController(const PIDConfigs *configs) {
-            PIDController(configs, &DEFAULT_TOLERANCES);
-        }
+        PIDController(const PIDConfigs *configs, const ToleranceConfigs *tolConfigs = &DEFAULT_TOLERANCES)
+            : configs(configs), tolConfigs(tolConfigs), setPoint(0.0), prevError(0.0), integral(0.0), derivative(0.0) 
+        {}
 
         void reset() {
             this->prevError = 0.0;
