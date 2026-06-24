@@ -3,6 +3,9 @@
 
 #include <DrivenMotor.h>
 
+#define TOP_POS 0
+#define BOT_POS 0
+
 class Elevator {
     private:
         DrivenMotor *motor1, *motor2;
@@ -56,6 +59,9 @@ class Elevator {
             Serial.println(motor1->currentPosition());
             Serial.println(motor2->currentPosition());
         }
+
+        void up() { this->setTarget(TOP_POS); }
+        void down() { this->setTarget(BOT_POS); }
 };
 
 #endif

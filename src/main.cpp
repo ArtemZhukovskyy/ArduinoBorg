@@ -3,11 +3,13 @@
 #include <ESP32Servo.h>
 #include "Claw.h"
 #include "Wrist.h"
+#include "Elevator.h"
 
 SerialReader reader;
 
 Claw claw(95, 170, 18);
 Wrist wrist(19, 21, 22, 23);
+Elevator elevator(0, 0, 0, 0, 0); // TODO blud idk
 
 void readCommand(size_t argc, char argv[]) {
    // argc = how many safe characters from the beginning
@@ -41,6 +43,11 @@ void readCommand(size_t argc, char argv[]) {
                wrist.home();
             }
             break;
+         case 'e':
+            if (argc == 6 && argv[3] == 'm') {
+               if (argv[4] == '2') elevator.up();
+               else if (argv[4] == '0')elevator.down();
+            }
          default:
             break;
       }
@@ -60,6 +67,7 @@ void setup()
 
 void run() {
    wrist.run();
+   elevator.run();
 }
 
 void loop()
