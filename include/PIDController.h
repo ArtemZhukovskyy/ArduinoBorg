@@ -44,9 +44,8 @@ class PIDController {
             reset();
         }
 
-        PIDController(const PIDConfigs *configs) {
-            PIDController(configs, &DEFAULT_TOLERANCES);
-        }
+        PIDController(const PIDConfigs *configs) :
+            PIDController(configs, &DEFAULT_TOLERANCES) {}
 
         void reset() {
             this->prevError = 0.0;
